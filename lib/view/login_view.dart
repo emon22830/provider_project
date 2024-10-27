@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider_project/res/components/round_button.dart';
 import 'package:provider_project/utils/routes/routes_name.dart';
 import 'package:provider_project/view/home_screen.dart';
 
@@ -10,6 +11,7 @@ class LoginView extends StatefulWidget {
 
   @override
   State<LoginView> createState() => _LoginViewState();
+
 }
 
 class _LoginViewState extends State<LoginView> {
@@ -24,6 +26,7 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height * 1;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -76,6 +79,25 @@ class _LoginViewState extends State<LoginView> {
                    );
                  }
              ),
+              SizedBox(height: height * .1,),
+              RoundButton(
+                title: 'Login',
+                onPress: (){
+if(emailController.text.isEmpty){
+  Utils.snackBar('Please enter email', context);
+}
+else if(passwordController.text.isEmpty){
+  Utils.flushBarErrorMessage('Please Enter Password', context);
+}
+else if(passwordController.text.length<6){
+  Utils.flushBarErrorMessage('Please enter 6 digit', context);
+}
+else{
+  print('APi hit');
+}
+                },
+
+              ),
             ],
           )
       )
